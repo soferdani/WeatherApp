@@ -4,36 +4,36 @@ const axios = require('axios')
 const apiKey = '8af922783277f743ae992b03ca5178cc'
 const router = express.Router()
 
-let rowData 
+
+let rowData
 
 router.get("/city/:cityName",async (req, res) => {
     let cityName = req.params.cityName
     try{
         const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`);
+        // const dataToTheUser = dataHendler(response.data)
         rowData = response.data
-        res.send(response.data)
+        res.send(rowData)
     } catch (err) {
         res.send(err)
     }
 })
 
-
 router.post("/city", async (req,res) => {
+    let temop = req.body
     try{
-        const newCity = new City ({
-            name: rowData.name,
-            temperature: rowData.main.temp,
-            condition: rowData.weather[0].description,
-            conditionPic: rowData.weather[0].icon 
-        })
-        newCity.save()
+        // const newCity = new City ({
+        //     name: rowData.name,
+        //     temperature: rowData.main.temp,
+        //     condition: rowData.weather[0].description,
+        //     conditionPic: rowData.weather[0].icon 
+        // })
+        // newCity.save()
         res.send ("new city has beed added")
     } catch (err) {
         res.send(err)
     }
 })
-
-
 
 router.get('/cities', async (req,res)=> {
     try{
@@ -43,8 +43,6 @@ router.get('/cities', async (req,res)=> {
         res.send(err)
     }
 })
-//good until here! lets see if nned to parse the data
-
 
 router.delete("/city/:cityName",async (req, res) => {
     try{
@@ -57,6 +55,31 @@ router.delete("/city/:cityName",async (req, res) => {
 })
 
 
-
-
 module.exports = router
+
+//good until here! lets see if nned to parse the data
+
+
+
+
+
+
+
+
+
+//**dont sure i need this....  */
+
+// class dataHendler {
+//     constructor () {
+//         this.cityDataFromAPI = {}
+//     }
+    
+//     hendelRowData (rowData) {
+//         this.cityDataFromAPI = {
+//             name: rowData.name,
+//             temperature: rowData.main.temp,
+//             condition: rowData.weather[0].description,
+//             conditionPic: rowData.weather[0].icon 
+//         }
+//     }
+// }
