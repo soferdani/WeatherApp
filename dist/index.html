@@ -7,6 +7,11 @@
     <title>WHETHER By Dani Sofer</title>
 </head>
 <body>
+
+    <div id="searchBar">
+        <input id="userInput" type="text" placeholder="Put your city">
+        <button id="srcBtn">Search</button>
+    </div>
     
     <div id="conteinder">
 
@@ -15,10 +20,14 @@
 
     <script type="text/x-handlebars-template" id="wather">
         {{#each allCityData}}
-        <div class="city">{{name}}</div>
-        <div class="temperature">{{temperature}}</div>
-        <div class="conditions">{{condition}}</div>
-        <div class="img">{{conditionPic}}</div>
+        <div class="city">
+            <div class="cityName">{{name}}</div>
+            <div class="temperature">{{temperature}}</div>
+            <div class="conditions">{{condition}}</div>
+            <img class="conditionPic" src="http://openweathermap.org/img/wn/{{conditionPic}}@2x.png" alt="">
+            <button class="saveCityBtn">save</button>
+            <button class="removeCityBtn">remove</button>
+        </div>
         {{/each}}
     </script>
 

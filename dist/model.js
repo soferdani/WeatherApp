@@ -38,9 +38,7 @@ class TampetureManager  {
         await $.ajax({
             method:'DELETE',
             url: `/city/${cityNameFromUser}`,
-            success:  (massege) => {
-                console.log(massege);
-                },
+            success:  (massege) => {},
             error: (xhr,text,error) => {console.log(text);}
         })
     }
