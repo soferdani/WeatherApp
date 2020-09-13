@@ -20,16 +20,29 @@ class TampetureManager  {
         let cityFromLocalArrey = this.cityData.find(c => c.name = cityNameFromUser)
         await $.post('/city', cityFromLocalArrey)
     }
-    //done not yet chechd
+    //done
 
     getDataFromDB = async () => {
         try {
             let cityDataFromDB = await $.get('/cities')
-            this.cityData.push(cityDataFromDB)
+            if (cityDataFromDB) {
+                this.cityData = [...cityDataFromDB]
+            }
         } catch (error) {
             console.log(error);
         }
     }
-    //done
-} 
+    //done - not yet tesded completly
 
+    removeCity = async (cityNameFromUser) => {
+        await $.ajax({
+            method:'DELETE',
+            url: `/city/${cityNameFromUser}`,
+            success:  (massege) => {
+                console.log(massege);
+                },
+            error: (xhr,text,error) => {console.log(text);}
+        })
+    }
+    //done
+}

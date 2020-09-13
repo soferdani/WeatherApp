@@ -5,13 +5,12 @@ const apiKey = '8af922783277f743ae992b03ca5178cc'
 const router = express.Router()
 
 const parseRowData = function (rowData) {
-    let newCityNotYetSaved = {
+    return {
         name: rowData.name,
         temperature: rowData.main.temp,
         condition: rowData.weather[0].description,
         conditionPic: rowData.weather[0].icon 
     }
-    return newCityNotYetSaved
 }
 
 router.get("/city/:cityName",async (req, res) => {
@@ -24,16 +23,19 @@ router.get("/city/:cityName",async (req, res) => {
         res.send(err)
     }
 })
+//done
 
 router.post("/city", async (req,res) => {
-    let cityToSaveInDB = req.body
-    console.log(cityToSaveInDB);
     try{
+        let cityToSaveInDB = req.body
+        toSave = new City (cityToSaveInDB)
+        toSave.save()
         res.send ("new city has beed added")
     } catch (err) {
         res.send(err)
     }
 })
+//done
 
 router.get('/cities', async (req,res)=> {
     try{

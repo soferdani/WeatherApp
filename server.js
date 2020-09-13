@@ -8,6 +8,8 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 mongoose.connect('mongodb://localhost/weather', { useNewUrlParser: true, useUnifiedTopology: true })
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.use(express.static(path.join(__dirname,'dist')))
 app.use(express.static(path.join(__dirname,'node_modules')))
