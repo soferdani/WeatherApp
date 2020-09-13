@@ -4,31 +4,31 @@ const axios = require('axios')
 const apiKey = '8af922783277f743ae992b03ca5178cc'
 const router = express.Router()
 
-
-let rowData
+const parseRowData = function (rowData) {
+    let newCityNotYetSaved = {
+        name: rowData.name,
+        temperature: rowData.main.temp,
+        condition: rowData.weather[0].description,
+        conditionPic: rowData.weather[0].icon 
+    }
+    return newCityNotYetSaved
+}
 
 router.get("/city/:cityName",async (req, res) => {
     let cityName = req.params.cityName
     try{
         const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`);
-        // const dataToTheUser = dataHendler(response.data)
-        rowData = response.data
-        res.send(rowData)
+        let dataToTheUser = parseRowData(response.data)
+        res.send(dataToTheUser)
     } catch (err) {
         res.send(err)
     }
 })
 
 router.post("/city", async (req,res) => {
-    let temop = req.body
+    let cityToSaveInDB = req.body
+    console.log(cityToSaveInDB);
     try{
-        // const newCity = new City ({
-        //     name: rowData.name,
-        //     temperature: rowData.main.temp,
-        //     condition: rowData.weather[0].description,
-        //     conditionPic: rowData.weather[0].icon 
-        // })
-        // newCity.save()
         res.send ("new city has beed added")
     } catch (err) {
         res.send(err)
