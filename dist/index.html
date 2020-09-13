@@ -8,7 +8,20 @@
 </head>
 <body>
     
-    <div>server is up</div>
+    <div id="conteinder">
+
+    </div>
+
+
+    <script type="text/x-handlebars-template" id="wather">
+        {{#each allCityData}}
+        <div class="city">{{name}}</div>
+        <div class="temperature">{{temperature}}</div>
+        <div class="conditions">{{condition}}</div>
+        <div class="img">{{conditionPic}}</div>
+        {{/each}}
+    </script>
+
 
     <script src="handlebars/dist/handlebars.js"></script>
     <script src="jquery/dist/jquery.js"></script>

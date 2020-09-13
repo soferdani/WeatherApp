@@ -1,14 +1,14 @@
-// const { template } = require("handlebars")
 
 const tampe = new TampetureManager ()
-
+const ranndeeerere = new Renderer()
 // tampe.getDataFromDB ()
+
+
 const userDemo = async function () {
-    let demoName = "Rome"
-    await tampe.getCityData("London")
-    await tampe.getCityData("Madrid")
-    await tampe.getCityData(demoName)
-    await tampe.removeCity(demoName)
+    await tampe.getDataFromDB()
+    let datatoRand = tampe.cityData
+    console.log(tampe.cityData); 
+    ranndeeerere.renderData(datatoRand)
 }
 
 userDemo()
